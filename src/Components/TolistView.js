@@ -10,7 +10,7 @@ const StyledRow = styled(Row)`
     background: #fafafa;
     color: rgba(0, 0, 0, 0.85);
     font-weight: 500;
-    padding: 16px;
+    padding: 16px 0;
     font-size: 16px;
     border-bottom: 1px solid #e8e8e8;
 `
