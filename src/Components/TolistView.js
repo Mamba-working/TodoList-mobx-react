@@ -5,6 +5,7 @@ import TodolistIterm from './TodolistIterm'
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
 import { Icon, Button } from 'antd'
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 const StyledRow = styled(Row)`
     background: #fafafa;
     color: rgba(0, 0, 0, 0.85);
@@ -13,13 +14,15 @@ const StyledRow = styled(Row)`
     font-size: 16px;
     border-bottom: 1px solid #e8e8e8;
 `
+const StyledUl = styled.ul`
+    list-style: none;
+`
 @inject(store => {
     return {
        store: store
     }
 })
 @observer
-export default
 class TodolistView extends React.Component {
     render () {
         const {store} = this.props.store
@@ -30,7 +33,9 @@ class TodolistView extends React.Component {
                     <Col span={8}>Content</Col>
                     <Col span={8}>IsFinished</Col>
                 </StyledRow>
-                {store.todolist.map(iterm => <TodolistIterm todo={iterm} key={iterm.id} />)}
+                <StyledUl>
+                  {store.todolist.map((iterm,index) => <TodolistIterm todo={iterm} key={iterm.id} index={index} />)}
+                </StyledUl>
                 <Icon
                     type="plus-circle" 
                     theme="twoTone" 
@@ -40,7 +45,7 @@ class TodolistView extends React.Component {
                     }} 
                     />
             </div>
-            
         )
     }
 }
+export default SortableContainer(TodolistView)

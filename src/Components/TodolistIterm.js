@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { observer, inject } from 'mobx-react'
 import { Table, Divider, Tag } from 'antd';
 import styled from 'styled-components'
+import {SortableContainer, SortableElement, arrayMove} from 'react-sortable-hoc';
 const StyledRow = styled(Row)`
     color: rgba(0, 0, 0, 0.85);
     padding: 16px;
@@ -12,9 +13,11 @@ const StyledRow = styled(Row)`
     &:hover {
         background: #e6f7ff;
     }
+    user-select: none;
 `
+
 @observer
-export default class TodolistIterm extends React.Component {
+class TodolistIterm extends React.Component {
     render () {
         const { todo } = this.props
         return(
@@ -35,3 +38,4 @@ export default class TodolistIterm extends React.Component {
 TodolistIterm.propTypes = {
     todo: PropTypes.any
   };
+  export default SortableElement(TodolistIterm)
